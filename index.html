@@ -1,5 +1,13 @@
-<!doctype html>
+<!--
+https://www.openstreetmap.org
+https://www.mapbox.com/mapbox
 
+cd police-shooting
+python -m SimpleHTTPServer 8080
+http://localhost:8080/Dropbox/UW/2015-2016/INFO%20343/Challenges/police-shooting/
+-->
+
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -23,14 +31,55 @@
   </head>
   <body>
     <!-- You may want to put your title and additional informaiton here -->
+    <header>Police Shootings</header>
+
+    <section id="tableInfo"> 
+      <div class="container">
+        <p>This webpage shows crowdsourced police shooting data from <a href="http://regressing.deadspin.com/deadspin-police-shooting-database-update-were-still-go-1627414202" target="_blank">deadspin</a>. <br> The number of victims <text id="hit">hit</text> or <text id="killed">killed</text> while being armed or unarmed with weapons are shown in the table below. </p>
+      </div>
+    </section>
+
+    <section id="table">
+      <div class="container">
+        <table class="table table-bordered">
+          <tr>
+            <th></th>
+            <th>Hit</th>
+            <th>Killed</th>
+          </tr>
+          <tr>
+            <th>Armed</th>
+            <td>armed/hit</td>
+            <td>armed/killed</td>
+          </tr>
+          <tr>
+            <th>Unarmed</th>
+            <td>unarmed/hit</td>
+            <td>unarmed/killed</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <section id="mapInfo">
+      <div class="container">
+        <p>The crowdsourced police shooting data from <a href="http://regressing.deadspin.com/deadspin-police-shooting-database-update-were-still-go-1627414202" target="_blank">deadspin</a> is also displayed in the interactive map below. View the victims by gender, race, or both. Circle color indicates if the victim's gender was 
+        <text id="male">male</text>, <text id="female">female</text>, or <text id="unspecified">unspecified</text>. Click each point for further details. </p>
+      </div>
+    </section>
+
     <div class="container">
       <!-- This is the div that your map will go in.  You'll need to reference its id -->
-      <div id="container"></div>
+      <div id="map"></div>
+    
     </div>
+    
+    <!--This is where you should execute your drawMap function-->
     <script>
-      
-      // This is where you should execute your drawMap function
+      drawMap();
       
     </script>
+  
+
   </body>
 </html>

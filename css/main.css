@@ -1,4 +1,67 @@
+/* @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"); */
+
 /* You'll probably want to add some styles here */
-#container {
-	height:800px;
+body {
+	font-family: "Helvetica", Sans-serif;
+	color: black;
+}
+
+header {
+	text-align: center;
+	font-size: 35px ;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+#tableInfo {
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+#tableInfo a:hover{
+	text-decoration: none;
+}
+
+#hit {
+	font-weight: bold;
+}
+
+#killed {
+	color:red;
+	font-weight: bold;
+}
+
+#mapInfo {
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+#mapInfo a:hover{
+	text-decoration: none;
+}
+#male {
+	color: blue;
+	font-weight: bold;
+
+}
+
+#female {
+	color: red;
+	font-weight: bold;
+
+}
+
+#unspecified {
+	color: green;
+	font-weight: bold;
+
+}
+
+
+#map {
+	height: 800px;
+	border-style: solid;
+	border-width: 5px;
+	/*border-color: #B5D0D0;*/
+	border-color: #F1EEE8;
+
 }
