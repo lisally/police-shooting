@@ -1,4 +1,3 @@
-
 // Function to draw map
 var drawMap = function() {
 

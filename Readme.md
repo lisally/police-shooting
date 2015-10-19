@@ -9,4 +9,4 @@ This repository is a challenge for the following [course](http://faculty.washing
 > Arvind, Angel
 
 ##### 3. Approximately how many hours did it take you to complete this challenge? #####
-> 12hrs
+> 13hrs
