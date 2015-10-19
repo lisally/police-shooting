@@ -74,10 +74,10 @@ var customBuild = function(data, map) {
 		}
 
 		// Sets circle marker radius and opacity based on victim's death outcome
-		var killRadius = 5;
+		var killRadius =6;
 		var killOpacity = 0.3;
 		if (outcome == "Hit") {
-			killRadius = 2.5;
+			killRadius = 3;
 			killOpacity = 1;
 		}
 

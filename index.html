@@ -1,19 +1,13 @@
-
-<!--
-https://www.openstreetmap.org
-https://www.mapbox.com/mapbox
-
-cd police-shooting
-python -m SimpleHTTPServer 8080
-http://localhost:8080/Dropbox/UW/2015-2016/INFO%20343/Challenges/police-shooting/
--->
-
 <!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Description, Author, Title -->
+    <meta name="description" content="A webpage of crowdsourced police shooting data from deadspin">
+    <meta name="author" content="Sally Li">   
     <title>Police Shootings</title>
 
     <!-- jQuery, Bootstrap -->
@@ -32,18 +26,20 @@ http://localhost:8080/Dropbox/UW/2015-2016/INFO%20343/Challenges/police-shooting
   </head>
 
   <body>
-    <!-- You may want to put your title and additional informaiton here -->
+    <!-- Header -->  
     <div class ="container">
       <header>Police Shootings</header>
     </div>
-      
+    
+    <!-- Header/Table Description -->  
     <section id="tableInfo"> 
       <div class="container">
         <p id="description">This webpage displays crowdsourced police shooting data from <a href="http://regressing.deadspin.com/deadspin-police-shooting-database-update-were-still-go-1627414202" target="_blank">deadspin</a></p>
-        <p> The number of victims <text id="hit">hit</text> or <text id="killed">killed</text> while being armed or unarmed with weapons are shown in the table below. </p>
+        <p> The number of victims that were <text id="hit">hit</text> or <text id="killed">killed</text> while being armed or unarmed with weapons are shown in the table below. </p>
       </div>
     </section>
 
+    <!-- Table -->  
     <section id="table">
       <div class="container">
         <table class="table table-bordered">
@@ -66,21 +62,24 @@ http://localhost:8080/Dropbox/UW/2015-2016/INFO%20343/Challenges/police-shooting
       </div>
     </section>
 
+    <!-- Map Description -->  
     <section id="mapInfo">
       <div class="container">
-        <p>The crowdsourced police shooting data from <a href="http://regressing.deadspin.com/deadspin-police-shooting-database-update-were-still-go-1627414202" target="_blank">deadspin</a> is also displayed in the interactive map below. View the victims by gender, race, or both using the options on the top-right corner. The circle colors indicate the victim's gender as 
-        <text id="male">male</text>, <text id="female">female</text>, or <text id="unspecified">unspecified</text>. Smaller circles represent that the victim was <text id="hit">hit</text> while larger circles represent that the victim was <text id="killed">killed</text>. Click on each point for further details on the incident. </p>
+        <p>The crowdsourced police shooting data is also displayed in the interactive map below. View the victims by gender, race, or both using the options on the top-right corner. The circle colors indicate the victim's gender as 
+        <text id="male">male</text>, <text id="female">female</text>, or <text id="unspecified">unspecified</text>. Smaller circles represent that the victim was <text id="hit">hit</text>, while larger circles represent that the victim was <text id="killed">killed</text>. Click on each point for further details on the incident. </p>
       </div>
     </section>
 
+    <!-- Map -->      
     <div class="container">
-      <!-- This is the div that your map will go in.  You'll need to reference its id -->
       <div id="map"></div>
     </div>
     
+    <!-- Javascript drawmap -->  
     <script>
       drawMap();
     </script> 
   
   </body>
+
 </html>
