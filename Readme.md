@@ -1,6 +1,6 @@
 # Police shootings
 
-This repository is a challenge for the following [course](http://faculty.washington.edu/mikefree/info343/) at the University of Washington.  The instructions are described [here](http://faculty.washington.edu/mikefree/info343/#/challenges/police-shooting).
+This repository is a challenge for the following [course](http://faculty.washington.edu/mikefree/info343/) at the University of Washington.  The instructions are described [here](http://faculty.washington.edu/mikefree/info343/#/challenges/map-challenge).
 
 ##### 1. What is the URL of this site, as hosted on your student webserver? #####
 > students.washington.edu/lisally/info343/police-shooting
