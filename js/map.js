@@ -1,135 +1,151 @@
-
-// Function to draw your map
+// Function to draw map
 var drawMap = function() {
 
-// Create map and set view
-var map = L.map('map').setView([30, -95], 4);
+	// Creates map and sets view
+	var map = L.map('map').setView([40, -100], 5);
 
-// Create a tile layer variable using the appropriate url
-//var layer = L.tileLayer('https://api.mapbox.com/v4/lisally.cifrqbc090om0slm027fb7tuk/0/0/0.png?access_token=pk.eyJ1IjoibGlzYWxseSIsImEiOiJjaWZzZWs2M3oxOWw2b2VrcnRobzh4OGRiIn0.fkN85EVGVV_JCobEVLwrJQ').addTo(map);
-	
-var layer =	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
+	// Creates a tile layer variable using the appropriate url
+	var layer = L.tileLayer('https://api.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibGlzYWxseSIsImEiOiJjaWZzZWs2M3oxOWw2b2VrcnRobzh4OGRiIn0.fkN85EVGVV_JCobEVLwrJQ').addTo(map);
 
-// Add the layer to your map
-layer.addTo(map);
+	// Adds the layer to map
+	layer.addTo(map);
 
-// Execute your function to get data
-getData(map);
+	// Executes function to get data
+	getData(map);
 
 }
 
 // Function for getting data
 var getData = function(map) {
-
-// Execute an AJAX request to get the data in data/response.js
-$.getJSON('data/response.json', function(data) { 
-	customBuild(data, map);
-});
-
-// $.getJSON('data/response.json', then(getData), console.log('sucessful'))
-
-//jQuery.get( 'data/response.js' [, data ] [, success ] [, dataType ] )
-//	$.getJSON(
-//	  'data.response.js',
-//	  then(getData),
-//	  alert('success'),
-//	  //dataType: dataType
-//	});
-
-// When your request is successful, call your customBuild function
-
+	$.ajax({
+		url: "data/response.json",
+		type: "get",
+		success: function(data) {
+			customBuild(data, map);
+		},
+		dataType: "json"	
+	});	
 }
 
-// Loop through your data and add the appropriate layers and points
-var customBuild = function(dataSet, map) {
-// Be sure to add each layer to the map
+// Add layers to map with markers
+var customBuild = function(data, map) {
+	
+	// Layer groups for gender
 	var male = new L.layerGroup([]);
 	var female = new L.layerGroup([]);
-	var unspecified = new L.layerGroup([]);
+	var unspecified = new L.layerGroup([]);	
 
+	// Layer groups for race
 	var white = new L.layerGroup([]);
 	var black = new L.layerGroup([]);
 	var asian = new L.layerGroup([]);
 	var indian = new L.layerGroup([]);
 	var hawaiian = new L.layerGroup([]);
-	var unknown = new L.layerGroup([]);
+	var unknown = new L.layerGroup([]);	
 
+	// Variables to keep count of data for table in index.html
+	var armedHit = 0;
+	var armedKilled = 0;
+	var unarmedHit = 0;
+	var unarmedKilled = 0;	
 
-	dataSet.forEach(function(data) {
-		var armedHit = 0;
-		var armedKilled = 0;
-		var unarmedHit = 0;
-		var unarmedKilled = 0;
+	// Loops through data once to create layers, markers, etc.
+	for (var i = 0; i < data.length; i++) {
+		var gender = data[i]["Victim's Gender"];
+		var race = data[i].Race;
+		var outcome = data[i]["Hit or Killed?"];
+		var armed = data[i]["Armed or Unarmed?"];
 
-		if (data["Armed or Unarmed?"] == "Armed" && data["Hit or Killed?"] == "Hit") {
-			armedHit++;
-		} else if (data["Armed or Unarmed?"] == "Armed" && data["Hit or Killed?"] == "Killed") {
-			armedKilled++;
-		} else if (data["Armed or Unarmed?"] == "Unarmed" && data["Hit or Killed?"] == "Hit") {
-			unarmedHit++;
-		} else if (data["Armed or Unarmed?"] == "Unarmed" && data["Hit or Killed?"] == "Killed") {
-			unarmedKilled++;
-		} 
-
-
-		var genderColor = "blue";
-		if (data["Victim's Gender"] == "Female") {
-				genderColor = "red";	
-		} else if (data["Victim's Gender"] == "Unknown") {
-				genderColor = "green";
+		// Calculates data for table in index.html
+		if (armed == "Armed") {
+			if (outcome == "Hit") {
+				armedHit++;
+			} else {
+				armedKilled++;
+			}
+		} else {
+			if (outcome == "Hit") {
+				unarmedHit++;
+			} else {
+				unarmedKilled++;
+			}
 		}
 
-		var circle = new L.circleMarker([data["lat"], data["lng"]], {
-			radius: 5,
-			fillOpacity: 0.5,
-			color: genderColor	
-		});
-		
-		var source = "read more".link(data["Source Link"]);
-		circle.bindPopup(data["Summary"] + " (" + source + ")");		
+		// Sets circle marker radius and opacity based on victim's death outcome
+		var killRadius = 5;
+		var killOpacity = 0.3;
+		if (outcome == "Hit") {
+			killRadius = 2.5;
+			killOpacity = 1;
+		}
 
-		if (data["Victim's Gender"] == "Male") {
+		// Sets circle marker color based on victim's gender
+		var genderColor = "blue"; 
+		if (gender == "Female") {
+			genderColor = "red";
+		} else if (gender == "Unknown") {
+			genderColor = "green";
+		}			
+
+		// Creates circle markers with victim's latitude, longitude, radius, opacity, and color
+		var circle = new L.circleMarker([data[i].lat, data[i].lng], {
+			radius: killRadius,
+			fillOpacity: killOpacity,
+			color: genderColor
+		});
+
+		// Adds summary and source of victim's incident to circle marker
+		circle.bindPopup(data[i].Summary + " (" + "read more".link(data[i]["Source Link"]) + ")");
+
+		// Adds layers to genderLayers
+		if (gender == "Male") {
 			circle.addTo(male);
-		} else if (data["Victim's Gender"] == "Female") {
+		} else if (gender == "Female") {
 			circle.addTo(female);
 		} else {
-			circle.addTo(unspecified)
-		} 
+			circle.addTo(unspecified);
+		}
 
-		if (data["Race"] == "White") {
+		// Adds layers to raceLayers
+		if (race == "White") {
 			circle.addTo(white);
-		} else if (data["Race"] == "Black or African American") {
+		} else if (race == "Black or African American") {
 			circle.addTo(black);
-		} else if (data["Race"] == "Asian") {
+		} else if (race == "Asian") {
 			circle.addTo(asian);
-		} else if (data["Race"] == "American Indian or Alaska Native") {
+		} else if (race == "American Indian or Alaska Native") {
 			circle.addTo(indian);
-		} else if (data["Race"] == "Native Hawaiian or Other Pacific Islander") {
+		} else if (race == "Native Hawaiian or Other Pacific Islander") {
 			circle.addTo(hawaiian);
 		} else {
 			circle.addTo(unknown);				
 		}
+	}
 
-	});
-
-
-// Once layers are on the map, add a leaflet controller that shows/hides layers
+	// Sets appropriate layers for genderLayers
 	var genderLayers = {
 		"Male": male,
 		"Female": female,
-		"Unspecified": unspecified,
+		"Unspecified": unspecified
 	}
 
-	var raceLayers = {	
+	// Sets appropriate layers for raceLayers
+	var raceLayers = {
+		"Unknown": unknown,		
 		"White": white, 
 		"Black or African American": black, 
 		"Asian": asian, 
 		"American Indian or Alaska Native": indian, 
-		"Native Hawaiian or Other Pacific Islander": hawaiian, 
-		"Unknown": unknown
+		"Native Hawaiian or Other Pacific Islander": hawaiian
+	}	
 
-	}
-
+	// Controls visibility of available layers
 	L.control.layers(null, genderLayers).addTo(map);
 	L.control.layers(null, raceLayers).addTo(map);  
-}
+
+	// Inputs data to table in index.html
+	document.getElementById("top-left").innerHTML = armedHit;
+	document.getElementById("top-right").innerHTML = armedKilled;
+	document.getElementById("bottom-left").innerHTML = unarmedHit;
+	document.getElementById("bottom-right").innerHTML = unarmedKilled;
+}	

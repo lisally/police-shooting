@@ -31,31 +31,34 @@ http://localhost:8080/Dropbox/UW/2015-2016/INFO%20343/Challenges/police-shooting
   </head>
   <body>
     <!-- You may want to put your title and additional informaiton here -->
-    <header>Police Shootings</header>
-
+    <div class ="container">
+      <header>Police Shootings</header>
+    </div>
+      
     <section id="tableInfo"> 
       <div class="container">
-        <p>This webpage shows crowdsourced police shooting data from <a href="http://regressing.deadspin.com/deadspin-police-shooting-database-update-were-still-go-1627414202" target="_blank">deadspin</a>. <br> The number of victims <text id="hit">hit</text> or <text id="killed">killed</text> while being armed or unarmed with weapons are shown in the table below. </p>
+        <p id="description">This webpage displays crowdsourced police shooting data from <a href="http://regressing.deadspin.com/deadspin-police-shooting-database-update-were-still-go-1627414202" target="_blank">deadspin</a></p>
+        <p> The number of victims <text id="hit">hit</text> or <text id="killed">killed</text> while being armed or unarmed with weapons are shown in the table below. </p>
       </div>
     </section>
 
     <section id="table">
       <div class="container">
         <table class="table table-bordered">
-          <tr>
+          <tr id="row1">
             <th></th>
             <th>Hit</th>
             <th>Killed</th>
           </tr>
           <tr>
-            <th>Armed</th>
-            <td>armed/hit</td>
-            <td>armed/killed</td>
+            <th id="tableArmed">Armed</th>
+            <td id="top-left"></td> 
+            <td id="top-right"></td>
           </tr>
           <tr>
-            <th>Unarmed</th>
-            <td>unarmed/hit</td>
-            <td>unarmed/killed</td>
+            <th id="tableUnarmed">Unarmed</th>
+            <td id="bottom-left"></td>
+            <td id="bottom-right"></td>
           </tr>
         </table>
       </div>
@@ -63,8 +66,8 @@ http://localhost:8080/Dropbox/UW/2015-2016/INFO%20343/Challenges/police-shooting
 
     <section id="mapInfo">
       <div class="container">
-        <p>The crowdsourced police shooting data from <a href="http://regressing.deadspin.com/deadspin-police-shooting-database-update-were-still-go-1627414202" target="_blank">deadspin</a> is also displayed in the interactive map below. View the victims by gender, race, or both. Circle color indicates if the victim's gender was 
-        <text id="male">male</text>, <text id="female">female</text>, or <text id="unspecified">unspecified</text>. Click each point for further details. </p>
+        <p>The crowdsourced police shooting data from <a href="http://regressing.deadspin.com/deadspin-police-shooting-database-update-were-still-go-1627414202" target="_blank">deadspin</a> is also displayed in the interactive map below. View the victims by gender, race, or both using the options on the top-right corner. The circle colors indicate the victim's gender as 
+        <text id="male">male</text>, <text id="female">female</text>, or <text id="unspecified">unspecified</text>. Smaller circles represent that the victim was <text id="hit">hit</text> while larger circles represent that the victim was <text id="killed">killed</text>. Click on each point for further details on the incident. </p>
       </div>
     </section>
 
