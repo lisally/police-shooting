@@ -5,7 +5,7 @@ var drawMap = function() {
 	var map = L.map('map').setView([40, -100], 5);
 
 	// Creates a tile layer variable using the appropriate url
-	var layer = L.tileLayer('https://api.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibGlzYWxseSIsImEiOiJjaWZzZWs2M3oxOWw2b2VrcnRobzh4OGRiIn0.fkN85EVGVV_JCobEVLwrJQ').addTo(map);
+	var layer = L.tileLayer('https://api.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibGlzYWxseSIsImEiOiJjaWZzZWs2M3oxOWw2b2VrcnRobzh4OGRiIn0.fkN85EVGVV_JCobEVLwrJQ');
 
 	// Adds the layer to map
 	layer.addTo(map);
@@ -16,10 +16,12 @@ var drawMap = function() {
 
 // Function for getting data
 var getData = function(map) {
+	var data;
 	$.ajax({
 		url: "data/response.json",
 		type: "get",
-		success: function(data) {
+		success: function(dat) {
+			data = dat;
 			customBuild(data, map);
 		},
 		dataType: "json"	
