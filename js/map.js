@@ -12,7 +12,6 @@ var drawMap = function() {
 
 	// Executes function to get data
 	getData(map);
-
 }
 
 // Function for getting data

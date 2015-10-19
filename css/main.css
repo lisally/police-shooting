@@ -89,17 +89,14 @@ header {
 #female {
 	color: red;
 	font-weight: bold;
-
 }
 
 #unspecified {
 	color: green;
 	font-weight: bold;
-
 }
 
 #map {
 	height: 800px;
 	padding-bottom: 3em;
-
 }
