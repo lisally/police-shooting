@@ -76,7 +76,7 @@ var customBuild = function(data, map) {
 		var killRadius =6;
 		var killOpacity = 0.3;
 		if (outcome == "Hit") {
-			killRadius = 3;
+			killRadius = 4;
 			killOpacity = 1;
 		}
 
@@ -145,8 +145,8 @@ var customBuild = function(data, map) {
 	L.control.layers(null, raceLayers).addTo(map);  
 
 	// Inputs data to table in index.html
-	document.getElementById("top-left").innerHTML = armedHit;
-	document.getElementById("top-right").innerHTML = armedKilled;
-	document.getElementById("bottom-left").innerHTML = unarmedHit;
-	document.getElementById("bottom-right").innerHTML = unarmedKilled;
+	document.getElementById("armedHit").innerHTML = armedHit;
+	document.getElementById("armedKilled").innerHTML = armedKilled;
+	document.getElementById("unarmedHit").innerHTML = unarmedHit;
+	document.getElementById("unarmedKilled").innerHTML = unarmedKilled;
 }	
